@@ -10,8 +10,8 @@ import SwiftUI
 struct Knopka: View {
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 10.0).foregroundColor(Color("BrandGray"))
-            Text("20 mins")
+            
+            Text("20 mins").background(RoundedRectangle(cornerRadius: 10.0).foregroundColor(Color("BrandGray")))
         }
         
         
