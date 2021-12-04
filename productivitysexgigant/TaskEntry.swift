@@ -16,7 +16,7 @@ class TaskEntry: NSManagedObject, Identifiable {
     @NSManaged private var timeFinishedStored: Date?
     @NSManaged private var timeStored: NSNumber?
     @NSManaged private var isInProgressStored: NSNumber?
-    @NSManaged private var isSuccesfulStored: NSNumber?
+    @NSManaged private var isSuccessfulStored: NSNumber?
     
     
     
@@ -54,8 +54,8 @@ extension TaskEntry {
     }
     
     var isSuccessful: Bool {
-        get { isSuccesfulStored?.boolValue ?? true }
-        set { isSuccesfulStored = newValue as NSNumber }
+        get { isSuccessfulStored?.boolValue ?? true }
+        set { isSuccessfulStored = newValue as NSNumber }
     }
     
 }

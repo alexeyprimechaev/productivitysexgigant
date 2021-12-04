@@ -13,7 +13,7 @@ struct ContentView: View {
     @FetchRequest(fetchRequest: TaskEntry.getAllTaskEntries()) var taskEntries: FetchedResults<TaskEntry>
     @Environment(\.managedObjectContext) var context
     @State var statusText = "Status Text"
-
+    
     
     var body: some View {
         
@@ -22,12 +22,13 @@ struct ContentView: View {
         VStack {
             Spacer()
             Text(statusText).font(.largeTitle.bold())
+            ChartView()
             Spacer()
             AddingView(statusText: $statusText)
-           
             
-        
-    }
+            
+            
+        }
     }
 }
 
@@ -49,13 +50,32 @@ struct AddingView: View {
     @State var time = Int(0)
     
     @Binding var statusText: String
-        
+    
     @FocusState var isFocused: Bool
     
     var body: some View {
         VStack {
             if addingState == .normal {
                 HStack(spacing: 12) {
+                        
+                    
+                    AddButton(buttonText: "test") {
+                        for i in 0...100 {
+                            let taskEntry = TaskEntry(context: context)
+                            
+                            
+                            taskEntry.title = "krasivo"
+                            
+                            taskEntry.timeStarted = Calendar.current.date(byAdding: .day, value: -1*(Int.random(in: 0..<20)), to: Date()) ?? Date()
+                            
+                            taskEntry.isSuccessful = Int.random(in: 0..<100) > 30 ? true : false
+                    
+                        
+                        }
+                        
+                        
+                        
+                    }
                     AddButton(buttonText: "5m") {
                         let taskEntry = TaskEntry(context: context)
                         time = 5
@@ -82,8 +102,8 @@ struct AddingView: View {
             } else {
                 TextField("Enter Task Title", text: $title) {
                     
-                    taskEntries.last?.title = title
-                    taskEntries.last?.time = time
+                    taskEntries.first?.title = title
+                    taskEntries.first?.time = time
                     addingState = .normal
                     
                     title = ""
@@ -93,7 +113,7 @@ struct AddingView: View {
                 
                     .focused($isFocused)
                 
-
+                
             }
         }
     }
