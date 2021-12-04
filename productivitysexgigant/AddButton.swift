@@ -1,7 +1,7 @@
 
 import SwiftUI
 
-struct Knopka: View {
+struct AddButton: View {
     
     @State var buttonText: String
     var onTapped: () -> Void
@@ -15,7 +15,7 @@ struct Knopka: View {
             }
             .padding(20)
             .background(RoundedRectangle(cornerRadius: 20.0).foregroundColor(Color(.systemGray6)))
-        }.padding()
+        }
      
     
         
@@ -25,6 +25,6 @@ struct Knopka: View {
 
 struct Knopka_Previews: PreviewProvider {
     static var previews: some View {
-        Knopka(buttonText: "4\nmins", onTapped: {})
+        AddButton(buttonText: "4\nmins", onTapped: {})
     }
 }
