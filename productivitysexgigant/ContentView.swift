@@ -10,9 +10,25 @@ import CoreData
 
 struct ContentView: View {
     
+    @FetchRequest(fetchRequest: TaskEntry.getAllTaskEntries()) var taskEntries: FetchedResults<TaskEntry>
+    @Environment(\.managedObjectContext) var context
+
+    
     var body: some View {
+        
+        
+        
+        VStack {
+            Knopka(buttonText: "haha  r") {
+                var taskEntry = TaskEntry(context: context)
+                taskEntry.title = "Panis"
+            }
+            List(taskEntries) { entry in
+                Text(entry.title)
+            }
         Text("Hello, world!")
             .padding()
+        }
     }
 }
 

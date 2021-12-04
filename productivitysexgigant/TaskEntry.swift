@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class TaskEntry: NSManagedObject {
+class TaskEntry: NSManagedObject, Identifiable {
     
     @NSManaged private var titleStored: String?
     
@@ -60,3 +60,15 @@ extension TaskEntry {
     
 }
 
+
+extension TaskEntry {
+    static func getAllTaskEntries() -> NSFetchRequest<TaskEntry> {
+        let request: NSFetchRequest<TaskEntry> = TaskEntry.fetchRequest() as! NSFetchRequest<TaskEntry>
+        
+        let sortDescriptor = NSSortDescriptor(keyPath: \TaskEntry.timeStartedStored, ascending: true)
+        
+        request.sortDescriptors = [sortDescriptor]
+        
+        return request
+    }
+}

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="19461" systemVersion="21C5045a" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="TaskItem" representedClassName="TaskItem" syncable="YES">
+    <entity name="TaskEntry" representedClassName=".TaskEntry" syncable="YES">
         <attribute name="isInProgressStored" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isSuccessfulStored" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="timeFinishedStored" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -9,6 +9,6 @@
         <attribute name="titleStored" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="TaskItem" positionX="-63" positionY="-18" width="128" height="119"/>
+        <element name="TaskEntry" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>

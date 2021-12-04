@@ -1,18 +1,23 @@
-//
-//  Knopka.swift
-//  productivitysexgigant
-//
-//  Created by Игорь Дячук on 04.12.2021.
-//
 
 import SwiftUI
 
 struct Knopka: View {
+    
+    @State var buttonText: String
+    var onTapped: () -> Void
+    
     var body: some View {
-        ZStack {
-            
-            Text("20 mins").background(RoundedRectangle(cornerRadius: 10.0).foregroundColor(Color("BrandGray")))
-        }
+        Button(action: onTapped) {
+            HStack {
+                Spacer()
+                Text(buttonText).font(.headline)
+                Spacer()
+            }
+            .padding(20)
+            .background(RoundedRectangle(cornerRadius: 20.0).foregroundColor(Color(.systemGray6)))
+        }.padding()
+     
+    
         
         
     }
@@ -20,6 +25,6 @@ struct Knopka: View {
 
 struct Knopka_Previews: PreviewProvider {
     static var previews: some View {
-        Knopka()
+        Knopka(buttonText: "4\nmins", onTapped: {})
     }
 }
