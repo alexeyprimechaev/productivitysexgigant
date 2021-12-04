@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct productivitysexgigantApp: App {
+    
+    var jsonData = JsonData()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(jsonData)
         }
     }
 }
