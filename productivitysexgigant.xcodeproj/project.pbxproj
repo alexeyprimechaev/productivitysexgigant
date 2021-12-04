@@ -12,7 +12,8 @@
 		784ACA71275B9375004BB04D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 784ACA70275B9375004BB04D /* Assets.xcassets */; };
 		784ACA74275B9375004BB04D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 784ACA73275B9375004BB04D /* Preview Assets.xcassets */; };
 		784ACA7D275B9A39004BB04D /* Knopka.swift in Sources */ = {isa = PBXBuildFile; fileRef = 784ACA7C275B9A39004BB04D /* Knopka.swift */; };
-		80D33EB2275B95BF000097BB /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D33EB1275B95BF000097BB /* Product.swift */; };
+		80D33EB2275B95BF000097BB /* TaskEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D33EB1275B95BF000097BB /* TaskEntry.swift */; };
+		80F5C5F8275B9D630087DEC4 /* TaskData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 80F5C5F6275B9D630087DEC4 /* TaskData.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,7 +23,8 @@
 		784ACA70275B9375004BB04D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		784ACA73275B9375004BB04D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		784ACA7C275B9A39004BB04D /* Knopka.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knopka.swift; sourceTree = "<group>"; };
-		80D33EB1275B95BF000097BB /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		80D33EB1275B95BF000097BB /* TaskEntry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskEntry.swift; sourceTree = "<group>"; };
+		80F5C5F7275B9D630087DEC4 /* TaskItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskItem.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,7 +58,8 @@
 			isa = PBXGroup;
 			children = (
 				784ACA6C275B9374004BB04D /* productivitysexgigantApp.swift */,
-				80D33EB1275B95BF000097BB /* Product.swift */,
+				80D33EB1275B95BF000097BB /* TaskEntry.swift */,
+				80F5C5F6275B9D630087DEC4 /* TaskData.xcdatamodeld */,
 				784ACA6E275B9374004BB04D /* ContentView.swift */,
 				784ACA7C275B9A39004BB04D /* Knopka.swift */,
 				784ACA70275B9375004BB04D /* Assets.xcassets */,
@@ -144,8 +147,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				784ACA6F275B9374004BB04D /* ContentView.swift in Sources */,
+				80F5C5F8275B9D630087DEC4 /* TaskData.xcdatamodeld in Sources */,
 				784ACA6D275B9374004BB04D /* productivitysexgigantApp.swift in Sources */,
-				80D33EB2275B95BF000097BB /* Product.swift in Sources */,
+				80D33EB2275B95BF000097BB /* TaskEntry.swift in Sources */,
 				784ACA7D275B9A39004BB04D /* Knopka.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +353,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		80F5C5F6275B9D630087DEC4 /* TaskData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				80F5C5F7275B9D630087DEC4 /* TaskItem.xcdatamodel */,
+			);
+			currentVersion = 80F5C5F7275B9D630087DEC4 /* TaskItem.xcdatamodel */;
+			path = TaskData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 784ACA61275B9374004BB04D /* Project object */;
 }

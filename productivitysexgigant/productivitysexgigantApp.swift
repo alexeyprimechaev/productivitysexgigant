@@ -10,10 +10,11 @@ import SwiftUI
 @main
 struct productivitysexgigantApp: App {
     
-    var jsonData = JsonData()
+    @StateObject private var dataController = DataController()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(jsonData)
+            ContentView().environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

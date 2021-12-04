@@ -6,9 +6,9 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct ContentView: View {
-    @EnvironmentObject var jsonDara: JsonData
     
     var body: some View {
         Text("Hello, world!")
@@ -19,5 +19,18 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
+    }
+}
+
+
+class DataController: ObservableObject {
+    let container = NSPersistentContainer(name: "TaskData")
+    
+    init() {
+        container.loadPersistentStores { description, error in
+            if let error = error {
+                print("Core Data failed to load: \(error.localizedDescription)")
+            }
+        }
     }
 }
