@@ -12,9 +12,13 @@ struct productivitysexgigantApp: App {
     
     @StateObject private var dataController = DataController()
     
+    @StateObject var appState = AppState()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView().environment(\.managedObjectContext, dataController.container.viewContext)
+            ContentView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
+                .environmentObject(appState)
         }
     }
 }

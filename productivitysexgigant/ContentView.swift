@@ -14,21 +14,44 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var context
     @State var statusText = "Status Text"
     
+    @EnvironmentObject var appState: AppState
+    @State var generativeView = GenerativeViewContainer()
     
     var body: some View {
         
-        
-        
-        VStack {
-            Spacer()
-            Text(statusText).font(.largeTitle.bold())
-            ChartView()
-            Spacer()
-            AddingView(statusText: $statusText)
+        ZStack {
+            generativeView.edgesIgnoringSafeArea(.all)
             
-            
-            
+            VStack {
+                Spacer()
+                
+               
+                Text(appState.statusText).font(.largeTitle.bold())
+                
+                if appState.isRunning {
+                    ForEach(taskEntries.filter{$0.isInProgredd}) { taskEntry in
+                        TimerView(taskEntry: taskEntry)
+                    }
+                    
+                } else {
+                    ChartView()
+                }
+                Spacer()
+                if appState.isRunning {
+                    ForEach([taskEntries.last ?? TaskEntry()]) { taskEntry in
+                        TaskControls(taskEntry: taskEntry)
+                    }
+                    
+                } else {
+                AddingView(statusText: $statusText)
+                
+                }
+                
+                
+            }
         }
+        
+        
     }
 }
 
@@ -36,6 +59,33 @@ enum AddingState {
     case normal, adding
 }
 
+struct TaskControls: View {
+    
+    @EnvironmentObject var appState: AppState
+    
+    @ObservedObject var taskEntry: TaskEntry
+    
+    var body: some View {
+        HStack {
+            Text(taskEntry.title)
+        if taskEntry.isInProgredd {
+            AddButton(buttonText: "Done") {
+                appState.isRunning = false
+                taskEntry.isSuccessful = true
+            }
+        } else {
+            AddButton(buttonText: "Done") {
+                appState.isRunning = false
+                taskEntry.isSuccessful = true
+            }
+            AddButton(buttonText: "Ne uspel(((") {
+                appState.isRunning = false
+                taskEntry.isSuccessful = false
+            }
+        }
+        }
+    }
+}
 
 struct AddingView: View {
     
@@ -52,6 +102,7 @@ struct AddingView: View {
     @Binding var statusText: String
     
     @FocusState var isFocused: Bool
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
         VStack {
@@ -63,6 +114,7 @@ struct AddingView: View {
                         for i in 0...100 {
                             let taskEntry = TaskEntry(context: context)
                             
+                            appState.newTaskItem = taskEntry
                             
                             taskEntry.title = "krasivo"
                             
@@ -78,6 +130,7 @@ struct AddingView: View {
                     }
                     AddButton(buttonText: "5m") {
                         let taskEntry = TaskEntry(context: context)
+                        appState.newTaskItem = taskEntry
                         time = 5
                         addingState = .adding
                         statusText = "New 5m Timer"
@@ -85,6 +138,7 @@ struct AddingView: View {
                     }
                     AddButton(buttonText: "20m") {
                         let taskEntry = TaskEntry(context: context)
+                        appState.newTaskItem = taskEntry
                         time = 20
                         addingState = .adding
                         statusText = "New 20m Timer"
@@ -92,6 +146,7 @@ struct AddingView: View {
                     }
                     AddButton(buttonText: "40m") {
                         let taskEntry = TaskEntry(context: context)
+                        appState.newTaskItem = taskEntry
                         time = 40
                         addingState = .adding
                         statusText = "New 40m Timer"
@@ -102,13 +157,25 @@ struct AddingView: View {
             } else {
                 TextField("Enter Task Title", text: $title) {
                     
-                    taskEntries.first?.title = title
-                    taskEntries.first?.time = time
+                    appState.newTaskItem.title = title
+                    appState.newTaskItem.time = time
+                    appState.newTaskItem.timeStarted = Date()
+                    appState.newTaskItem.timeFinished = taskEntries.first?.timeStarted.addingTimeInterval(Double(time)) ?? Date()
+                    appState.newTaskItem.isInProgredd = true
                     addingState = .normal
+                    
+                    appState.isRunning = true
+                    
                     
                     title = ""
                     time = 0
                     statusText = "Timer Running"
+                    
+                    do {
+                        try context.save()
+                    } catch {
+                        print(error)
+                    }
                 }.textFieldStyle(RoundedRectTextFieldStyle()).padding()
                 
                     .focused($isFocused)

@@ -14,25 +14,46 @@ struct ChartView: View {
     let daysInChart = 7
     
     @State var statDays = [(daysOffset: Int, succ: Int, fail: Int)]()
+    @State var maxItems = 1
+    
+    let chartHeight = 180.0
 
     var body: some View {
 
                
-        HStack{
+        HStack(alignment: .bottom, spacing: 10){
             
+            ForEach((0..<daysInChart), id: \.self) { i in
             
+                
+                VStack(spacing: 0) {
+                    
+                    if !statDays.isEmpty {
+                        
+                        
+                        RoundedRectangle(cornerRadius: 1000).frame(height: CGFloat(chartHeight*CGFloat(statDays[i].fail)/CGFloat(maxItems))).foregroundStyle(LinearGradient(colors: [Color.pink, Color.pink.opacity(0.2)], startPoint: .top, endPoint: .bottom))
+                        RoundedRectangle(cornerRadius: 1000).frame(height: CGFloat(chartHeight*CGFloat(statDays[i].succ)/CGFloat(maxItems))).foregroundStyle(LinearGradient(colors: [Color.blue, Color.blue.opacity(0.2)], startPoint: .top, endPoint: .bottom))
+                        
+                        
+                    }
+                   
+                }
+            }
             
         }.onChange(of: taskEntries.filter {_ in return true}) { newValue in
             updateChartData()
         }
         .onAppear {
         updateChartData()
-        }.frame(height: 200)
+        }.frame(height: 200) .padding(20)
+            .background(RoundedRectangle(cornerRadius: 20.0).foregroundColor(Color(.systemGray6)))
 
 
     }
     
     func updateChartData() {
+        statDays = [(daysOffset: Int, succ: Int, fail: Int)]()
+        
         for i in 0..<daysInChart {
         
             var succ = 0
@@ -51,6 +72,16 @@ struct ChartView: View {
         
             statDays.append((daysOffset: i, succ: succ, fail: fail))
         }
+        
+        var maxDaily = 1
+        
+        for item in statDays {
+            if item.succ + item.fail > maxDaily {
+                maxDaily = item.succ + item.fail
+            }
+        }
+        
+        maxItems = maxDaily
     }
 }
 
